@@ -31,8 +31,7 @@ def posts_with_unpublished_category(mixer: Mixer, user: Model):
 @pytest.fixture
 def future_posts(mixer: Mixer, user: Model):
     date_later_now = (
-        timezone.now() + timedelta(days=date)
-        for date in range(1, 11)
+        timezone.now() + timedelta(days=date) for date in range(1, 11)
     )
     return mixer.cycle(N_PER_FIXTURE).blend(
         "blog.Post", author=user, pub_date=date_later_now
@@ -54,8 +53,11 @@ def unpublished_posts_with_published_locations(
 
 @pytest.fixture
 def post_with_another_category(
-    mixer: Mixer, user, published_location, published_category,
-        another_category
+    mixer: Mixer,
+    user,
+    published_location,
+    published_category,
+    another_category,
 ):
     assert published_category.id != another_category.id
     return mixer.blend(
@@ -68,7 +70,7 @@ def post_with_another_category(
 
 @pytest.fixture
 def post_of_another_author(
-    mixer: Mixer, user, another_user,  published_location, published_category
+    mixer: Mixer, user, another_user, published_location, published_category
 ):
     assert user.id != another_user.id
     return mixer.blend(
@@ -81,18 +83,19 @@ def post_of_another_author(
 
 @pytest.fixture
 def post_with_published_location(
-        mixer: Mixer, user, published_location, published_category):
-    img = Image.new('RGB', (100, 100), color=(73, 109, 137))
+    mixer: Mixer, user, published_location, published_category
+):
+    img = Image.new("RGB", (100, 100), color=(73, 109, 137))
     img_io = BytesIO()
-    img.save(img_io, format='JPEG')
-    image_file = ImageFile(img_io, name='temp_image.jpg')
+    img.save(img_io, format="JPEG")
+    image_file = ImageFile(img_io, name="temp_image.jpg")
     post = mixer.blend(
-        'blog.Post',
+        "blog.Post",
         is_published=True,
         location=published_location,
         category=published_category,
         author=user,
-        image=image_file
+        image=image_file,
     )
     return post
 

@@ -11,10 +11,10 @@ from conftest import KeyVal, get_page_context_form
 
 
 def find_edit_and_delete_urls(
-        adapted_comments: Sequence[CommentModelAdapterT],
-        post_page_response: HttpResponse,
-        urls_start_with: KeyVal,
-        user_client: django.test.Client,
+    adapted_comments: Sequence[CommentModelAdapterT],
+    post_page_response: HttpResponse,
+    urls_start_with: KeyVal,
+    user_client: django.test.Client,
 ) -> Tuple[KeyVal, KeyVal]:
     """Looks up two links in the post_page_response's content.
     The links must be found between two adjacent comments to the post.

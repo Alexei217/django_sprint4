@@ -151,7 +151,7 @@ class EditCommentFormTester(BaseFormTester):
     @property
     def author_assignment_error_message(self) -> str:
         return (
-            "Убедитесь, что при редактировании комментария в поле \"автор\""
+            'Убедитесь, что при редактировании комментария в поле "автор"'
             " передаётся аутентифицированный пользователь."
         )
 

@@ -16,7 +16,7 @@ def find_links_between_lines(
     if not link_text_in:
         link_text_in = "\n".join(
             page_content.split("\n")[
-                (start_lineix if start_lineix >= 0 else 0): (
+                (start_lineix if start_lineix >= 0 else 0) : (
                     end_lineix if end_lineix >= 0 else None
                 )
             ]

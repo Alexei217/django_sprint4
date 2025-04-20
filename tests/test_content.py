@@ -374,8 +374,10 @@ class TestContent:
             )
 
     def test_only_own_pubs_in_category(
-        self, user_client, post_with_published_location,
-            post_with_another_category
+        self,
+        user_client,
+        post_with_published_location,
+        post_with_another_category,
     ):
         response = self.category_tester.user_client_testget()
         try:
@@ -384,14 +386,13 @@ class TestContent:
             pass
         else:
             context_posts = response.context.get(items_key)
-            assert (
-                len(context_posts) == 1
-            ), ("Убедитесь, что на странице категории "
-                "не отображаются публикации других категорий.")
+            assert len(context_posts) == 1, (
+                "Убедитесь, что на странице категории "
+                "не отображаются публикации других категорий."
+            )
 
     def test_only_own_pubs_in_profile(
-            self, user_client, post_with_published_location,
-            post_of_another_author
+        self, user_client, post_with_published_location, post_of_another_author
     ):
         response = self.profile_tester.user_client_testget()
         try:
@@ -400,10 +401,10 @@ class TestContent:
             pass
         else:
             context_posts = response.context.get(items_key)
-            assert (
-                    len(context_posts) == 1
-            ), ("Убедитесь, что на странице пользователя "
-                "не отображаются публикации других авторов.")
+            assert len(context_posts) == 1, (
+                "Убедитесь, что на странице пользователя "
+                "не отображаются публикации других авторов."
+            )
 
     def test_unpublished_category(
         self, user_client, posts_with_unpublished_category
@@ -455,10 +456,10 @@ class TestContent:
             pass
         else:
             context_posts = response.context.get(items_key)
-            assert (
-                len(context_posts) == 0
-            ), ("Убедитесь, что на главной странице "
-                "не отображаются отложенные публикации.")
+            assert len(context_posts) == 0, (
+                "Убедитесь, что на главной странице "
+                "не отображаются отложенные публикации."
+            )
 
         response = self.category_tester.user_client_testget()
         try:
@@ -467,10 +468,10 @@ class TestContent:
             pass
         else:
             context_posts = response.context.get(items_key)
-            assert (
-                len(context_posts) == 0
-            ), ("Убедитесь, что на странице категории "
-                "не отображаются отложенные публикации.")
+            assert len(context_posts) == 0, (
+                "Убедитесь, что на странице категории "
+                "не отображаются отложенные публикации."
+            )
 
     def test_pagination(
         self, user_client, many_posts_with_published_locations

@@ -43,10 +43,10 @@ def enable_debug_false():
 
 class SafeImportFromContextManager:
     def __init__(
-            self,
-            import_path: str,
-            import_names: Iterable[str],
-            import_of: str = "",
+        self,
+        import_path: str,
+        import_names: Iterable[str],
+        import_of: str = "",
     ):
         self._import_path: str = import_path
         self._import_names: Iterable[str] = import_names
@@ -67,7 +67,7 @@ class SafeImportFromContextManager:
 
 
 with SafeImportFromContextManager(
-        "blog/models.py", ["Category", "Location", "Post"], import_of="моделей"
+    "blog/models.py", ["Category", "Location", "Post"], import_of="моделей"
 ):
     try:
         from blog.models import Category, Location, Post  # noqa:F401
@@ -134,7 +134,7 @@ def another_user_client(another_user):
 
 
 def get_post_list_context_key(
-        user_client, page_url, page_load_err_msg, key_missing_msg
+    user_client, page_url, page_load_err_msg, key_missing_msg
 ):
     try:
         post_response = user_client.get(page_url)
@@ -164,12 +164,19 @@ class _TestModelAttrs:
         return param
 
     def test_model_attrs(
-            self, field: str, type: type, params: dict,
-            field_error: Optional[str], type_error: Optional[str],
-            param_error: Optional[str], value_error: Optional[str]):
+        self,
+        field: str,
+        type: type,
+        params: dict,
+        field_error: Optional[str],
+        type_error: Optional[str],
+        param_error: Optional[str],
+        value_error: Optional[str],
+    ):
         model_name = self.model.__name__
         field_error = field_error or (
-            f"В модели `{model_name}` укажите атрибут `{field}`.")
+            f"В модели `{model_name}` укажите атрибут `{field}`."
+        )
         assert hasattr(self.model, field), field_error
 
         model_field = getattr(self.model, field).field
@@ -243,13 +250,14 @@ def CommentModel() -> Model:
     return getattr(models, comment_class_name)
 
 
-class ItemNotCreatedException(Exception):
-    ...
+class ItemNotCreatedException(Exception): ...
 
 
 def get_get_response_safely(
-        user_client: Client, url: str, err_msg: Optional[str] = None,
-        expected_status=HTTPStatus.OK
+    user_client: Client,
+    url: str,
+    err_msg: Optional[str] = None,
+    expected_status=HTTPStatus.OK,
 ) -> HttpResponse:
     response = user_client.get(url)
     if err_msg is not None:
@@ -258,7 +266,7 @@ def get_get_response_safely(
 
 
 def get_a_post_get_response_safely(
-        user_client: Client, post_id: Union[str, int]
+    user_client: Client, post_id: Union[str, int]
 ) -> HttpResponse:
     return get_get_response_safely(
         user_client,
@@ -283,7 +291,7 @@ def get_create_a_post_get_response_safely(user_client: Client) -> HttpResponse:
 
 
 def _testget_context_item_by_class(
-        context, cls: type, err_msg: str, inside_iter: bool = False
+    context, cls: type, err_msg: str, inside_iter: bool = False
 ) -> KeyVal:
     """If `err_msg` is not empty, empty return value will
     produce an AssertionError with the `err_msg` error message"""
@@ -360,9 +368,9 @@ def cleanup(request):
     for root, dirs, files in os.walk(image_dir):
         for filename in files:
             if (
-                    filename.endswith(".jpg")
-                    or filename.endswith(".gif")
-                    or filename.endswith(".png")
+                filename.endswith(".jpg")
+                or filename.endswith(".gif")
+                or filename.endswith(".png")
             ):
                 file_path = os.path.join(root, filename)
                 if os.path.getmtime(file_path) >= start_time:

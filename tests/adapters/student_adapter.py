@@ -13,18 +13,15 @@ class StudentModelAdapter(ModelAdapter):
 
     @property
     @abstractmethod
-    def _access_by_name_fields(self):
-        ...
+    def _access_by_name_fields(self): ...
 
     @property
     @abstractmethod
-    def AdapterFields(self) -> type:
-        ...
+    def AdapterFields(self) -> type: ...
 
     @property
     @abstractmethod
-    def ItemModel(self) -> Type[Model]:
-        ...
+    def ItemModel(self) -> Type[Model]: ...
 
     def __getattr__(self, name: str) -> Any:
         if name.startswith("_") or name in self._access_by_name_fields:
@@ -74,5 +71,4 @@ class StudentModelAdapter(ModelAdapter):
 
     @property
     @abstractmethod
-    def displayed_field_name_or_value(self):
-        ...
+    def displayed_field_name_or_value(self): ...
