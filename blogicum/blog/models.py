@@ -63,9 +63,6 @@ class Post(BaseModel):
     def __str__(self):
         return self.title
 
-    def comment_count(self):
-        return self.comments.all().count()
-
 
 class Location(BaseModel):
     name = models.CharField(max_length=256, verbose_name="Название места")
